@@ -16,7 +16,7 @@ app.use('/places', placesController)
 
 // HOME PAGE
 app.get('/', (req, res) => {
-    res.render('home')
+    res.render('home') // render looks for views folder, don't have to specify
 })
 
 //404
