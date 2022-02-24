@@ -1,15 +1,30 @@
-require('dotenv').config()
+// DEPENDENCIES
 const express = require('express')
+
+// CONFIGURATION
+require('dotenv').config()
 const app = express()
+const PORT = process.env.PORT
 
-app.use('/places', require('./controllers/places_controller'))
+// MIDDLEWARE
+//app.set('views', __dirname + '/views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
 
+const placesController = require('./controllers/places_controller')
+app.use('/places', placesController)
+
+// HOME PAGE
 app.get('/', (req, res) => {
-    res.send('Hello World')
+    res.render('home')
 })
 
+//404
 app.get('*', (req, res) => {
     res.status(404).send(`<h1>404 Page</h1>`)
 })
 
-app.listen(process.env.PORT)
+// LISTEN
+app.listen(PORT, () => {
+    console.log('nomming at port', PORT)
+})
