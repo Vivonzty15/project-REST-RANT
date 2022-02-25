@@ -6,3 +6,9 @@ h1 {
     text-align: center;
     color: rgb(241, 62, 42)
 }
+
+img {
+    width: 50%;
+    display: block;
+    margin:auto;
+}
