@@ -10,6 +10,7 @@ function Def (html) {
       </head>
       <body>
         {html.children}
+        {/*sticky footer */}
       </body>
     </html>
   )

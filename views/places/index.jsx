@@ -5,7 +5,7 @@ function places ({places}) {
     let placesFormatted = places.map((place, index) => { 
         return (
             <div className='col-sm-6 pt-5'>
-                <a href={`/places/${index}`}> <h2 className='text-center'>{place.name}</h2></a>
+                <a className="text-decoration-none" href={`/places/${index}`}> <h2 className='text-center'>{place.name}</h2></a>
                 <p className='text-center'>
                     {place.cuisines}
                 </p>
