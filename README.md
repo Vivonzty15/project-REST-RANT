@@ -4,3 +4,8 @@ REST-Rant is an app where users can review restaurants. They can add restaurants
 
 ## API Structure
 ![image](/assets/images/RestRant.drawio.png)
+
+### IDEAS
+* drop down of all 50 states in form
+* Sticky footer with my portfolio and linkedin
+* 
