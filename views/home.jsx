@@ -10,7 +10,7 @@ function home () {
                     <a href="/places">
                         <button className='btn-dark btn-lg'>Browse Places</button>
                     </a>
-                    <a href='/newPlace'>
+                    <a href='/places/new'>
                         <button className='btn-dark btn-lg'> Add Place </button> 
                     </a>
                     <p className='text-center'>Rave about your favorite places, or rant about your least favorite!</p>

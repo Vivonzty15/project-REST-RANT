@@ -1,26 +1,41 @@
-const router = require('express').Router()
+const express = require('express')
+const places = express.Router()
+const Place = require('../models/places.js')
 
-router.get('/new', (req, res) => {
-    res.render('places/new')
-  })
-
-router.get('/', (req, res) => {
-    let places = [{
-        name: 'Olive Garden',
-        city: 'Wichita',
-        state: 'KS',
-        cuisines: 'Italian food',
-        pic: 'https://media.olivegarden.com/en_us/images/marketing/italian-family-restaurant-olive-garden-g6-rdv.jpg'
-    }, {
-        name: 'McDonald\'s',
-        city: 'Hutchinson',
-        state: 'KS',
-        cuisines: 'American fast food',
-        pic: 'https://www.eatthis.com/wp-content/uploads/sites/4/2021/06/mcdonalds-2.jpg?quality=82&strip=1&resize=640%2C360'
-    }
-
-    ]
-    res.render('places/index', { places }) // render looks for views folder, don't have to specify
+// INDEX
+places.get('/', (req, res) => {
+    res.render('places/index', 
+    { 
+        places: Place,
+    }) // render looks for views folder, don't have to specify
 })
 
-module.exports = router
+// NEW
+places.get('/new', (req, res) => {
+    res.render('places/new')
+})
+
+// SHOW
+places.get('/:arrayIndex', (req, res) => {
+    if (Place[req.params.arrayIndex]) {
+        res.render('places/show', {
+            place: Place[req.params.arrayIndex]
+        })
+    } else {
+        res.render('error404')
+    }
+})
+
+// CREATE
+places.post('/', (req, res) => {
+    if (!req.body.pic) {
+        req.body.pic = 'https://www.discoverlosangeles.com/sites/default/files/images/2019-01/laxbw-prime-1715-hor-wide.jpg?width=1600&height=1200&fit=crop&quality=78&auto=webp'
+    }
+    if (!req.body.city && !req.body.state) {
+        req.body.city = 'unknown'
+    }
+    Place.push(req.body)
+    res.redirect('/places')
+})
+
+module.exports = places
