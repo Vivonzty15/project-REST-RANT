@@ -4,7 +4,7 @@ const Def = require('../default')
 function places ({places}) {
     let placesFormatted = places.map((place, index) => { 
         return (
-            <div className='col-sm-6 pt-5'>
+            <div key={places.name} className='col-sm-6 pt-5'>
                 <a className="text-decoration-none" href={`/places/${index}`}> <h2 className='text-center'>{place.name}</h2></a>
                 <p className='text-center'>
                     {place.cuisines}
@@ -19,13 +19,6 @@ function places ({places}) {
     return (
         <Def>
             <main>
-                <nav className='navbar navbar-inverse'>
-                    <div className='container-fluid'>
-                        <div className='navbar-header'>
-                            <a className='navbar-brand' href='/'>REST-rant</a>
-                        </div>
-                    </div>
-                </nav>
                 <h1>Places to Rant or Rave About</h1>
                 <div className='row'>
                     {placesFormatted}

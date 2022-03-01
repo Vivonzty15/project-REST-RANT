@@ -18,7 +18,7 @@ router.get('/new', (req, res) => {
 router.get('/:arrayIndex', (req, res) => {
     if (Place[req.params.arrayIndex]) {
         res.render('places/show', {
-            place: Place[req.params.arrayIndex]
+            place: Place[req.params.arrayIndex] // anonymous object. ( place: ) is the field
         })
     } else {
         res.render('error404')
@@ -26,7 +26,7 @@ router.get('/:arrayIndex', (req, res) => {
 })
 
 // CREATE
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { // I thought it was supposed to be a POST /places route?
     if (!req.body.pic) {
         req.body.pic = 'https://www.discoverlosangeles.com/sites/default/files/images/2019-01/laxbw-prime-1715-hor-wide.jpg?width=1600&height=1200&fit=crop&quality=78&auto=webp'
     }

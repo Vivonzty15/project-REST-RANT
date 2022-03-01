@@ -2,6 +2,11 @@ body {
     background-color: darkgray;
 }
 
+main {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
 h1 {
     text-align: center;
     color: rgb(241, 62, 42)
@@ -11,4 +16,28 @@ img {
     width: 50%;
     display: block;
     margin:auto;
+}
+
+nav {
+    background-color: rgb(66, 66, 66);
+    padding: 10px
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 25px;
+}
+nav a {
+    color:antiquewhite;
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    color:rgb(241, 62, 42);
+    text-decoration: none;
 }
