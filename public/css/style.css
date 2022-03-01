@@ -8,14 +8,23 @@ main {
 }
 
 h1 {
-    text-align: center;
-    color: rgb(241, 62, 42)
+    color: rgb(167, 78, 26)
 }
 
-img {
+.homeIMG {
     width: 50%;
     display: block;
-    margin:auto;
+    margin: auto;
+}
+
+.showIMG {
+    width: 25%;
+}
+
+.indexIMG {
+    width: 25%;
+    display: block;
+    margin: auto;
 }
 
 nav {
