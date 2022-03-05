@@ -52,6 +52,12 @@ function new_form () {
                             id="cuisines"
                             required />
                     </div>
+                    <div className="form-group">
+                        <label htmlFor="founded">Founded Year</label>
+                        <input 
+                            className="form-control" 
+                            id="founded" name="founded" />
+                        </div>
                     <br/>
                     <input className="btn btn-dark" type="submit" value="Add Place"/>
                 </form>

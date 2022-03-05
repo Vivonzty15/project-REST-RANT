@@ -2,10 +2,10 @@ const React = require('react')
 const Def = require('../default')
 
 function places ({places}) {
-    let placesFormatted = places.map((place, index) => { 
+    let placesFormatted = places.map((place) => { 
         return (
             <div key={places.name} className='col-sm-6 pt-5'>
-                <a className="text-decoration-none" href={`/places/${index}`}> 
+                <a className="text-decoration-none" href={`/places/${place.id}`}> 
                     <h2 className='text-center'>{place.name}</h2>
                 </a>
                 <p className='text-center'>
