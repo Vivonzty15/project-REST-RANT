@@ -8,10 +8,12 @@ function Show({ place }) {
                 <div className='row'>
                     <div className='col-sm-6 col-md-4 col-lg-3'>
                         <h1>{place.name}</h1>
-                        <h4>{place.cuisines}</h4>
-                        <p>
-                            Located in {place.city}, {place.state}
-                        </p>
+                        <div className='rating'>
+                            <h2 className='subtitle' >Rating</h2>
+                            <h3 className='sub-text'>Not rated yet</h3>
+                        </div>
+                        <h2 className='subtitle'>Description</h2>
+                        <h3 className='sub-text'>{place.showEstablished()}</h3>
                         <div className='row'>
                             <a href={`/places/${place.id}/edit`} className="btn btn-dark btn-sm">
                                 Edit
@@ -22,11 +24,9 @@ function Show({ place }) {
                                 </button>
                             </form>
                         </div>
-                        <div className='rating'>
-                            <p>Not rated yet</p>
-                        </div>
                         <div className='comments'>
-                            <p>No comments yet</p>
+                            <h3 className='subtitle'>Comments</h3>
+                            <p className='sub-text'>No comments yet</p>
                         </div>
                     </div>
                     <div className='col-sm-6 col-md-4 col-lg-3'>
