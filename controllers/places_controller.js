@@ -4,18 +4,18 @@ const db = require('../models/')
 // INDEX
 router.get('/', (req, res) => {
     db.Place.find()
-    .then((places) => {
-        res.render('places/index', {places} )
-    })
-    .catch(err => {
-        console.log(err)
-        res.render('error404')
-    })
+        .then((places) => {
+            res.render('places/index', { places })
+        })
+        .catch(err => {
+            res.render('error404')
+        })
 })
 
 // NEW
 router.get('/new', (req, res) => {
     res.render('places/new')
+    
 })
 
 // EDIT
@@ -27,7 +27,6 @@ router.get('/:id/edit', (req, res) => {
             })
         })
         .catch(err => {
-            console.log(err)
             res.render('error404')
         })
 })
@@ -35,25 +34,43 @@ router.get('/:id/edit', (req, res) => {
 // SHOW
 router.get('/:id', (req, res) => {
     db.Place.findById(req.params.id)
-    .then(place => {
-        res.render(`places/show`, { place } )
-    })
-    .catch(err => {
-        console.log(err)
-        res.render('error404')
-    })
+        .then(place => {
+            res.render(`places/show`, { place })
+        })
+        .catch(err => {
+            res.render('error404')
+        })
 })
 
 // CREATE
-router.post('/', (req, res) => { 
+router.post('/', (req, res) => {
     db.Place.create(req.body)
-    .then(() => {
-        res.redirect('/places')
-    })
-    // .catch(err => {
-    //     console.log('err', err)
-    //     res.render('err404')
-    // })
+        .then(() => {
+            res.redirect('/places')
+        })
+        .catch(err => {
+            console.log(err.name)
+            let message
+            if (err && err.name == 'ValidationError') {
+                message = 'Validation Error: '
+                for (var field in err.errors) {
+                    message += `${field} was ${err.errors[field].value}. `
+                    message += `${err.errors[field].message}`
+                }
+                console.log('Validation error message', message)
+                res.render('places/new', { message })
+            } else if (err && err.name == "MongoServerError") {
+                message = "Duplicate Error: "
+                for (var field in err.errors) {
+                    message += `${field} ${err.errors[field].value}`
+                    message += `${err.errors[field].message}`
+                }
+                res.render('places/new', { message })
+            }
+            else {
+                res.render('error404')
+            }
+        })
 })
 
 router.get('/data/seed', (req, res) => {

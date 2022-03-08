@@ -1,4 +1,4 @@
-const db = require('../models')
+const db = require('../models') // kept getting error "could not find module ../models", also tried ./models
 
 db.Place.create([{
     name: 'H-Thai-ML',
@@ -23,3 +23,4 @@ db.Place.create([{
     console.log('Failure!', err)
     process.exit()
 })
+

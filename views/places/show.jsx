@@ -25,8 +25,8 @@ function Show({ place }) {
                             </form>
                         </div>
                         <div className='comments'>
-                            <h3 className='subtitle'>Comments</h3>
-                            <p className='sub-text'>No comments yet</p>
+                            <h2 className='subtitle'>Comments</h2>
+                            <h3 className='sub-text'>No comments yet</h3>
                         </div>
                     </div>
                     <div className='col-sm-6 col-md-4 col-lg-3'>

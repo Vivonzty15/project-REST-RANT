@@ -1,16 +1,22 @@
 const React = require('react')
 const Def = require('../default')
 
-function new_form () {
+function new_form (data) {
+    let message = ''
+    if (data.message) {
+        message = (
+            <h4 className="alert-danger">
+                {data.message}
+            </h4>
+        )
+    }
     return (
         <Def>
-            <main>
-                <h1>Add a New Place</h1>
-                <div className="backButton float-right">
-                    <a href="/places"><button className='btn btn-dark'>back to places</button></a>
-                </div>
+            <main className='container-fluid'>
+                <h1 className='text-center'>Add a New Place</h1>
+                {message}
                 <form action='/places' method='POST'>
-                    <div className='form-group'>
+                    <div className='col-sm-6 col-md-4 col-lg-3 form-group'>
                         <label htmlFor="name">Restaurant Name</label>
                         <input
                             className='form-control'
@@ -19,7 +25,7 @@ function new_form () {
                             id="name"
                             required />
                     </div>
-                    <div className='form-group'>
+                    <div className='col-sm-6 col-md-4 col-lg-3 form-group'>
                         <label htmlFor="pic">Restaurant Picture</label>
                         <input
                             className='form-control'
@@ -27,7 +33,7 @@ function new_form () {
                             name="pic"
                             id="pic"/>
                     </div>
-                    <div className='form-group'>
+                    <div className='col-sm-6 col-md-4 col-lg-3 form-group'>
                         <label htmlFor="city">City</label>
                         <input
                             className='form-control'
@@ -35,7 +41,7 @@ function new_form () {
                             name="city"
                             id="city" />
                     </div>
-                    <div className='form-group'>
+                    <div className='col-sm-6 col-md-4 col-lg-3 form-group'>
                         <label htmlFor="state">State</label>
                         <input
                             className='form-control'
@@ -43,7 +49,7 @@ function new_form () {
                             name="state"
                             id="state" />
                     </div>
-                    <div className='form-group'>
+                    <div className='col-sm-6 col-md-4 col-lg-3 form-group'>
                         <label htmlFor="cuisines">Cuisines</label>
                         <input
                             className='form-control'
@@ -52,14 +58,16 @@ function new_form () {
                             id="cuisines"
                             required />
                     </div>
-                    <div className="form-group">
+                    <div className="col-sm-6 col-md-4 col-lg-3 form-group">
                         <label htmlFor="founded">Founded Year</label>
                         <input 
                             className="form-control" 
-                            id="founded" name="founded" />
+                            id="founded" name="founded" 
+                            name="founded"
+                            defaultValue={new Date().getFullYear()} />
                         </div>
                     <br/>
-                    <input className="btn btn-dark" type="submit" value="Add Place"/>
+                    <input className="align-center btn btn-dark" type="submit" value="Add Place"/>
                 </form>
             </main>
         </Def>
