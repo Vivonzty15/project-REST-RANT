@@ -4,7 +4,7 @@ const Def = require('../default')
 function places ({places}) {
     let placesFormatted = places.map((place) => { 
         return (
-            <div key={places.name} className='col-sm-6 pt-5'>
+            <div key={places.name} className='col-sm-6 col-md-4 col-lg-3 pt-5'>
                 <a className="text-decoration-none" href={`/places/${place.id}`}> 
                     <h2 className='text-center'>{place.name}</h2>
                 </a>

@@ -6,7 +6,7 @@ function Show({ place }) {
         <Def>
             <main className='container-fluid'>
                 <div className='row'>
-                    <div className='col-md-6'>
+                    <div className='col-sm-6 col-md-4 col-lg-3'>
                         <h1>{place.name}</h1>
                         <h4>{place.cuisines}</h4>
                         <p>
@@ -29,7 +29,7 @@ function Show({ place }) {
                             <p>No comments yet</p>
                         </div>
                     </div>
-                    <div className='col-md-6'>
+                    <div className='col-sm-6 col-md-4 col-lg-3'>
                         <img className='showIMG' src={place.pic} alt={place.name} />
                     </div>
                 </div>

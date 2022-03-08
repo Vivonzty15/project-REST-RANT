@@ -56,16 +56,44 @@ router.post('/', (req, res) => {
     // })
 })
 
+router.get('/data/seed', (req, res) => {
+    db.Place.insertMany([
+        {
+            name: 'Burger King',
+            pic: 'https://images.gyft.com/merchants/i-100-1348411828820-30_hd.png',
+            city: 'Wichita',
+            state: 'KS',
+            cuisines: 'American Fast Food',
+            founded: 1999
+        },
+        {
+            name: 'McDonald\'s',
+            pic: 'https://s7d1.scene7.com/is/image/mcdonalds/FAQ_2PUB_574x384:2-column-desktop',
+            city: 'Manhattan',
+            state: 'NY',
+            cuisines: 'American Fast Food',
+            founded: 1980
+        }
+    ]).then(createdPlaces => {
+        console.log(createdPlaces)
+        res.redirect('/places')
+    })
+})
+
 // DELETE
-router.delete('/:arrayIndex', (req, res) => {
-    res.send('DELETE /places/:id stub')
+router.delete('/:id', (req, res) => {
+    db.Place.findByIdAndDelete(req.params.id)
+        .then(deletedPlace => {
+            console.log(deletedPlace)
+            res.status(303).redirect(`/places/index`)
+        })
 })
 
 // UPDATE
 router.put('/:id', (req, res) => {
     db.Place.updateOne(`/places/${req.params.id}`)
         .then(() => {
-            res,redirect(`/breads/${req.params.id}`)
+            res.redirect(`/places/${req.params.id}`)
         })
 })
 
