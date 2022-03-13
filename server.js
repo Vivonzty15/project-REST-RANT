@@ -4,7 +4,8 @@ const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 
 // CONFIGURATION
-require('dotenv').config()
+const path = require('path')
+require('dotenv').config({path: path.resolve(__dirname+'/.env')})
 const app = express()
 const PORT = process.env.PORT
 mongoose.connect(process.env.MONGO_URI, {
@@ -38,3 +39,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log('nomming at port', PORT)
 })
+
+module.exports= mongoose

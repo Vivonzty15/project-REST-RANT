@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('../models/')
+const db = require('../models')
 
 // INDEX
 router.get('/', (req, res) => {
@@ -15,34 +15,38 @@ router.get('/', (req, res) => {
 // NEW
 router.get('/new', (req, res) => {
     res.render('places/new')
-    
+
 })
+
+
 
 // EDIT
 router.get('/:id/edit', (req, res) => {
     db.Place.findById(req.params.id)
-        .then(place => {
-            res.render('places/edit', {
-                place: place
-            })
-        })
-        .catch(err => {
-            res.render('error404')
-        })
+    .then(place => {
+        res.render('places/edit', { place })
+    })
+    .catch(err => {
+        res.render('error404')
+    })
 })
 
 // SHOW
 router.get('/:id', (req, res) => {
-    db.Place.findById(req.params.id)
+    db.Place.findOne({_id : req.params.id})
+        .populate('comments')
         .then(place => {
-            res.render(`places/show`, { place })
+            console.log(place.comments)
+            res.render('places/show', { place })
         })
         .catch(err => {
+            console.log('err', err)
             res.render('error404')
         })
 })
 
-// CREATE
+
+// CREATE PLACE
 router.post('/', (req, res) => {
     db.Place.create(req.body)
         .then(() => {
@@ -61,6 +65,7 @@ router.post('/', (req, res) => {
                 res.render('places/new', { message })
             } else if (err && err.name == "MongoServerError") {
                 message = "Duplicate Error: "
+                console.log(err)
                 for (var field in err.errors) {
                     message += `${field} ${err.errors[field].value}`
                     message += `${err.errors[field].message}`
@@ -73,45 +78,63 @@ router.post('/', (req, res) => {
         })
 })
 
-router.get('/data/seed', (req, res) => {
-    db.Place.insertMany([
-        {
-            name: 'Burger King',
-            pic: 'https://images.gyft.com/merchants/i-100-1348411828820-30_hd.png',
-            city: 'Wichita',
-            state: 'KS',
-            cuisines: 'American Fast Food',
-            founded: 1999
-        },
-        {
-            name: 'McDonald\'s',
-            pic: 'https://s7d1.scene7.com/is/image/mcdonalds/FAQ_2PUB_574x384:2-column-desktop',
-            city: 'Manhattan',
-            state: 'NY',
-            cuisines: 'American Fast Food',
-            founded: 1980
-        }
-    ]).then(createdPlaces => {
-        console.log(createdPlaces)
-        res.redirect('/places')
-    })
+// CREATE COMMENT
+router.post('/:id/comment', (req, res) => {
+    console.log('post comment', req.body)
+    if (req.body.rant) {
+        req.body.rant = true
+    }
+    else {
+        req.body.rant = false
+    }
+    console.log(req.body)
+    db.Place.findById(req.params.id)
+        .then(place => {
+            db.Comment.create(req.body)
+                .then(comment => {
+                    place.comments.push(comment.id)
+                    place.save()
+                        .then(() => {
+                            res.redirect(`/places/${req.params.id}`)
+                        })
+                        .catch(err => {
+                            console.log('no redirect')
+                            res.render('error404')
+                        })
+                })
+                .catch(err => {
+                    console.log(err, 'no push')
+                    res.render('error404')
+                })
+        })
+        .catch(err => {
+            console.log(err, 'no create')
+            res.render('error404')
+        })
 })
 
 // DELETE
 router.delete('/:id', (req, res) => {
     db.Place.findByIdAndDelete(req.params.id)
-        .then(deletedPlace => {
-            console.log(deletedPlace)
-            res.status(303).redirect(`/places/index`)
-        })
+    .then(place => {
+        res.redirect('/places')
+    })
+    .catch(err => {
+        console.log('err', err)
+        res.render('error404')
+    })
 })
 
 // UPDATE
 router.put('/:id', (req, res) => {
-    db.Place.updateOne(`/places/${req.params.id}`)
-        .then(() => {
-            res.redirect(`/places/${req.params.id}`)
-        })
+    db.Place.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => {
+        res.redirect(`/places/${req.params.id}`)
+    })
+    .catch(err => {
+        console.log('err', err)
+        res.render('error404')
+    })
 })
 
 
