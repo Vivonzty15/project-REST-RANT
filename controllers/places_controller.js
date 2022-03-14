@@ -113,7 +113,10 @@ router.post('/:id/comment', (req, res) => {
         })
 })
 
-// DELETE
+// DELETE COMMENT
+router.delete('/:id/comment/:id', (req, res) => {
+
+// DELETE PLACE
 router.delete('/:id', (req, res) => {
     db.Place.findByIdAndDelete(req.params.id)
     .then(place => {

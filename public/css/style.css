@@ -59,3 +59,8 @@ nav a:hover {
     color:rgb(241, 62, 42);
     text-decoration: none;
 }
+
+.form {
+    display: block;
+    width: 50%;
+}
