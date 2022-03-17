@@ -114,7 +114,7 @@ router.post('/:id/comment', (req, res) => {
 })
 
 // DELETE COMMENT
-router.delete('/:id/comment/:id', (req, res) => {
+router.delete('/:id/comment/:id', (req, res) => {})
 
 // DELETE PLACE
 router.delete('/:id', (req, res) => {
